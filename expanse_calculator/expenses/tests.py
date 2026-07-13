@@ -72,3 +72,11 @@ class ExpenseModelTestCase(APITestCase):
         self.expense.delete()
         with self.assertRaises(Expense.DoesNotExist):
             Expense.objects.get(id=self.expense.id)
+
+    # testa API
+    def test_expense_api(self):
+        """
+        Test the Expense API endpoint.
+        """
+        response = self.client.get('/api/expenses/')
+        self.assertEqual(response.status_code, 200)
