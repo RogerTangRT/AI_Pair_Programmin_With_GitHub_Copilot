@@ -14,11 +14,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+from expenses import views
+
+router = DefaultRouter()
+router.register(r'expenses', views.ExpenseViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]
+
+admin.site.site_header = "Expense Calculator Admin"
+
 
 admin.site.site_header = "Expense Calculator Admin"
